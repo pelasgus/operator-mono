@@ -1,8 +1,9 @@
 {
-  description = "flake for operator mono fonts";
+  description = "Flake for Operator Mono font (OTF)";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -45,7 +46,11 @@
 
           installPhase = ''
             runHook preInstall
-            install -Dm644 fonts/*.ttf -t $out/share/fonts/truetype
+
+            echo "Installing OperatorMonoLig-Book.otf"
+            mkdir -p $out/share/fonts/opentype
+            install -Dm644 fonts/OperatorMonoLig-Book.otf $out/share/fonts/opentype/OperatorMonoLig-Book.otf
+
             runHook postInstall
           '';
         };
